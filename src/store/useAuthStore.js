@@ -6,12 +6,12 @@ import { io } from "socket.io-client";
 const BASE_URL =
   import.meta.env.MODE === "development"
     ? "http://localhost:5001/"
-    : "http://54.72.235.242/api";
+    : "http://13.218.169.158/api";
 
 const socketUrl =
   import.meta.env.MODE === "development"
     ? BASE_URL
-    : "http://54.72.235.242:5001/";
+    : "http://13.218.169.158:5001/";
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
