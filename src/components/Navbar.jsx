@@ -1,5 +1,5 @@
+// Navbar.jsx
 import { Link } from "react-router-dom";
-
 import {
   LogOut,
   MessageSquare,
@@ -8,9 +8,12 @@ import {
   MessageSquareText,
 } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
+import { useChatStore } from "../store/useChatStore";
 
 const Navbar = () => {
   const { logout, authUser } = useAuthStore();
+  const { unreadCount } = useChatStore();
+
 
   return (
     <header
@@ -47,9 +50,16 @@ const Navbar = () => {
                   <span className="hidden sm:inline">Profile</span>
                 </Link>
 
-                <Link to={"/chat"} className={`btn btn-sm gap-2`}>
+                <Link to={"/chat"} className={`btn btn-sm gap-2 relative`}>
                   <MessageSquareText className="size-5" />
                   <span className="hidden sm:inline">Chat</span>
+                  
+                  {/* Unread Count Badge */}
+                  {unreadCount > 0 && (
+                    <span className="absolute -top-1 right-11 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                      {unreadCount > 9 ? '9+' : unreadCount}
+                    </span>
+                  )}
                 </Link>
 
                 <button className="flex gap-2 items-center" onClick={logout}>
@@ -64,4 +74,5 @@ const Navbar = () => {
     </header>
   );
 };
+
 export default Navbar;
